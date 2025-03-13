@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import CryptoAsset
+from .forms import AssetForm
 
-def my_digital_asset(request):
-    return HttpResponse("Hello, digital assets!")
 
+def portfolio(request):
+    assets = CryptoAsset.objects.filter(user=request.user)
+    return render(request, 'digital_asset/portfolio.html', {'assets': assets})
